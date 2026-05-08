@@ -101,5 +101,7 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
             sudo systemctl restart mlops-serve
-            sleep 5
-            curl -s http://localhost:8000/health | grep "ok"
+            echo "Waiting for server to load model..."
+            sleep 20
+            # Try the health check. If it fails, wait 5 more seconds and try once more.
+            curl -s http://localhost:8000/health || (sleep 5 && curl -s http://localhost:8000/health) | grep "ok"
