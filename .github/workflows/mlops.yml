@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # JOB 1: Chạy unit tests trên dữ liệu giả lập
+# JOB 1: Chạy unit tests trên dữ liệu giả lập
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -24,10 +24,10 @@ jobs:
           pip install "setuptools<70.0.0"
           pip install -r requirements.txt
       - name: Run tests
-              run: |
-                export PYTHONPATH=.
-                export MLFLOW_TRACKING_URI=sqlite:///mlflow.db
-                pytest tests/ -v
+        run: |
+          export PYTHONPATH=.
+          export MLFLOW_TRACKING_URI=sqlite:///mlflow.db
+          pytest tests/ -v
 
   # JOB 2: Huấn luyện mô hình thực tế và đẩy Model lên Cloud Storage
   train:
